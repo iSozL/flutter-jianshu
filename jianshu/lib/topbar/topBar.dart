@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../base/data.dart';
+
 class TopBar extends StatelessWidget {
   const TopBar({Key key}) : super(key: key);
 
@@ -15,7 +16,9 @@ class TopBar extends StatelessWidget {
             Text("连载"),
           ],
         ),
-        appBar: AppBar(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(80),
+          child: AppBar(
             bottom: TabBar(
               unselectedLabelColor: Colors.black38,
               indicatorColor: Colors.red,
@@ -49,6 +52,7 @@ class TopBar extends StatelessWidget {
                     )),
               ),
             )),
+        )
       ),
     );
   }
