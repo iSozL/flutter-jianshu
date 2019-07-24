@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../base/data.dart';
-import '../bottomBar/bottomBar.dart';
 class TopBar extends StatelessWidget {
   const TopBar({Key key}) : super(key: key);
 
@@ -50,7 +49,6 @@ class TopBar extends StatelessWidget {
                     )),
               ),
             )),
-            bottomNavigationBar: BottomNavBar()
       ),
     );
   }

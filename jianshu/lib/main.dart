@@ -12,7 +12,7 @@ void main() {
         platform: TargetPlatform.iOS),
     home: new SplashScreen(),
     routes: <String, WidgetBuilder>{
-      '/home': (BuildContext context) => new HomePage()
+      '/home': (BuildContext context) => new Homepage()
     },
   ));
 }
