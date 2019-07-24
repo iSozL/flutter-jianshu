@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../base/data.dart';
+import '../pages/tabBars/recommand.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({Key key}) : super(key: key);
@@ -11,7 +12,7 @@ class TopBar extends StatelessWidget {
       child: Scaffold(
         body: TabBarView(
           children: <Widget>[
-            Text("推荐"),
+            Recommand(),
             Text("专题"),
             Text("连载"),
           ],
