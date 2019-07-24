@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../base/data.dart';
+import '../bottomBar/bottomBar.dart';
 class TopBar extends StatelessWidget {
   const TopBar({Key key}) : super(key: key);
 
@@ -8,6 +9,13 @@ class TopBar extends StatelessWidget {
     return DefaultTabController(
       length: topBar.length,
       child: Scaffold(
+        body: TabBarView(
+          children: <Widget>[
+            Text("推荐"),
+            Text("专题"),
+            Text("连载"),
+          ],
+        ),
         appBar: AppBar(
             bottom: TabBar(
               unselectedLabelColor: Colors.black38,
@@ -42,6 +50,7 @@ class TopBar extends StatelessWidget {
                     )),
               ),
             )),
+            bottomNavigationBar: BottomNavBar()
       ),
     );
   }
