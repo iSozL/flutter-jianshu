@@ -81,21 +81,16 @@ class _RecommandState extends State<Recommand> {
                                         flex: 3,
                                         child: GestureDetector(
                                           onTap: () {
-                                            // Navigator.push(
-                                            //   context,
-                                            //   new MaterialPageRoute(
-                                            //       builder: (context) =>
-                                            //           new NewsDetails(
-                                            //               "https://baidu.com", '详情')),
-                                            // );
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         WebviewScaffold(
-                                                          url: 'https://jianshu.com/p/${value["object"]["data"]["slug"]}',
+                                                          url:
+                                                              'https://jianshu.com/p/${value["object"]["data"]["slug"]}',
                                                           appBar: AppBar(
-                                                            title: Text("Reading"),
+                                                            title:
+                                                                Text("Reading"),
                                                           ),
                                                           withLocalStorage:
                                                               true,
@@ -116,7 +111,18 @@ class _RecommandState extends State<Recommand> {
                                                           FontWeight.bold),
                                                   textAlign: TextAlign.start),
                                               Text(value["object"]["data"]
-                                                  ["public_abbr"])
+                                                  ["public_abbr"]),
+                                              Row(
+                                                children: <Widget>[
+                                                  SizedBox(width: 5,),
+                                                  Icon(Icons.signal_wifi_4_bar, size: 14, color: Colors.red,),
+                                                  SizedBox(width: 2,),
+                                                  Text(value["object"]["data"]["total_fp_amount"].toString(), style: TextStyle(color: Colors.red),),
+                                                  SizedBox(width: 2,),
+                                                  Text("  ${value["object"]["data"]["public_comments_count"].toString()}评论   ${value["object"]["data"]["likes_count"].toString()}喜欢"
+                                                  , style: TextStyle(color: Colors.black26),)
+                                                ],
+                                              )
                                             ],
                                           ),
                                         )),
