@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
 
 class Recommand extends StatefulWidget {
@@ -44,13 +45,13 @@ class _RecommandState extends State<Recommand> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         http
-        .get('https://www.jianshu.com/asimov/trending/now?count=50')
-        .then((http.Response response) {
-      setState(() {
-        var res = json.decode(response.body);
-        this.data.addAll(res);
-      });
-    });
+            .get('https://www.jianshu.com/asimov/trending/now?count=50')
+            .then((http.Response response) {
+          setState(() {
+            var res = json.decode(response.body);
+            this.data.addAll(res);
+          });
+        });
         // _getMore();
       }
     });
@@ -77,21 +78,48 @@ class _RecommandState extends State<Recommand> {
                                 child: Row(
                                   children: <Widget>[
                                     Expanded(
-                                      flex: 3,
-                                      child: Column(
-                                        children: <Widget>[
-                                          Text(
-                                              value["object"]["data"]["title"]
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold),
-                                              textAlign: TextAlign.start),
-                                          Text(value["object"]["data"]
-                                              ["public_abbr"])
-                                        ],
-                                      ),
-                                    ),
+                                        flex: 3,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            // Navigator.push(
+                                            //   context,
+                                            //   new MaterialPageRoute(
+                                            //       builder: (context) =>
+                                            //           new NewsDetails(
+                                            //               "https://baidu.com", '详情')),
+                                            // );
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        WebviewScaffold(
+                                                          url: 'https://jianshu.com/p/${value["object"]["data"]["slug"]}',
+                                                          appBar: AppBar(
+                                                            title: Text("Reading"),
+                                                          ),
+                                                          withLocalStorage:
+                                                              true,
+                                                          // 允许LocalStorage
+                                                          withJavascript: true,
+                                                          withZoom: true,
+                                                        )));
+                                          },
+                                          child: Column(
+                                            children: <Widget>[
+                                              Text(
+                                                  value["object"]["data"]
+                                                          ["title"]
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                  textAlign: TextAlign.start),
+                                              Text(value["object"]["data"]
+                                                  ["public_abbr"])
+                                            ],
+                                          ),
+                                        )),
                                     // 有图片渲染,无图片不渲染
                                     value["object"]["data"]["list_image_url"] !=
                                             ""
